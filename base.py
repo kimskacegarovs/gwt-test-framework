@@ -44,3 +44,15 @@ class GivenWhenThenTestScenario(ABC):
     @classmethod
     def get_subclass_descriptions(cls) -> list[GivenWhenThenDescription]:
         return [sc.get_description() for sc in cls.__subclasses__()]
+
+    @classmethod
+    def render_as_markdown(cls) -> str:
+        return f"""
+            ### Test Scenario: {cls.__name__}
+            
+            **Given**: {cls.description_given}
+            
+            **When**: {cls.description_when}
+            
+            **Then**: {cls.description_then}
+        """
