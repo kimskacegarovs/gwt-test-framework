@@ -1,12 +1,14 @@
 # gwt-test-framework
 
-A Python framework for declaring **Given-When-Then** tests. This library helps you organize and structure your tests based on the Given-When-Then methodology, making your tests more readable, maintainable, and descriptive.
+A Python framework for declaring **Given-When-Then** tests.
 
+This library helps you organize and structure your tests using the **Given-When-Then** methodology, making them more readable, maintainable, and descriptive. It enables you to **bind the actual code to verbose logic descriptions**, fostering a better understanding of test scenarios.
+
+Additionally, it is fully compatible with **BDD** (Behavior-Driven Development) practices, allowing teams to write tests that reflect the business logic in a **clear, human-readable format**.
 ## Features
 - Declarative **Given-When-Then** test structure.
 - Easy-to-use framework for defining tests with clear descriptions.
-- Provides mechanisms for validation and test execution.
-- Supports extension via subclassing.
+- Export test scenarios as Markdown for documentation.
 
 ## Installation
 
