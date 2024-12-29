@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 
-class GWTMissingDescriptionException(BaseException):
+class GivenWhenThenDescriptionException(BaseException):
     pass
 
 
@@ -32,7 +32,7 @@ class GivenWhenThenTestScenario(ABC):
         self.given()
         self.when()
         self.then()
-        self.validate_descriptions()
+        self.validate_description()
 
     @abstractmethod
     def given(self) -> None:
@@ -46,23 +46,25 @@ class GivenWhenThenTestScenario(ABC):
     def then(self) -> None:
         raise NotImplementedError(f"{self.__class__.__name__} must implement the 'then' method.")
 
-    def validate_descriptions(self) -> None:
+    def validate_description(self) -> None:
         try:
             description = self.description
         except AttributeError:
-            raise GWTMissingDescriptionException("Description not provided for the scenario")
+            raise GivenWhenThenDescriptionException("Description not provided for the scenario")
 
         if not isinstance(description, GivenWhenThenDescription):
-            raise GWTMissingDescriptionException(f"Description must be of type {GivenWhenThenDescription.__name__}")
+            raise GivenWhenThenDescriptionException(f"Description must be of type {GivenWhenThenDescription.__name__}")
 
     @classmethod
     def get_subclass_descriptions(cls) -> list[GivenWhenThenDescription]:
         descriptions = []
         for subclass in cls.__subclasses__():
             try:
-                descriptions.append(subclass.description)
+                description = subclass.description
             except AttributeError:
-                pass
+                description = None
+            if isinstance(description, GivenWhenThenDescription):
+                descriptions.append(description)
         return descriptions
 
     @classmethod
