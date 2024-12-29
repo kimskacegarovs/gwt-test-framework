@@ -1,6 +1,13 @@
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
-from .descriptions import GivenWhenThenDescription
+
+@dataclass
+class GivenWhenThenDescription:
+    test_title: str
+    given: str
+    when: str
+    then: str
 
 
 class GivenWhenThenTestScenario(ABC):
@@ -49,10 +56,10 @@ class GivenWhenThenTestScenario(ABC):
     def render_as_markdown(cls) -> str:
         return f"""
             ### Test Scenario: {cls.__name__}
-            
+
             **Given**: {cls.description_given}
-            
+
             **When**: {cls.description_when}
-            
+
             **Then**: {cls.description_then}
         """

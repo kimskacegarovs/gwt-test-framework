@@ -1,0 +1,8 @@
+.idea/
+.venv/
+.env
+*.egg-info/
+*.pyc
+__pycache__/
+uv.lock
+.python-version
