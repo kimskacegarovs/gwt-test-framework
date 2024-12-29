@@ -1,4 +1,4 @@
-from gwt_test_framework.base import GivenWhenThenTestScenario, GWTMissingDescriptionException, GivenWhenThenDescription
+from gwt_test_framework.base import GivenWhenThenTestScenario, GivenWhenThenDescriptionException, GivenWhenThenDescription
 import pytest
 
 
@@ -53,7 +53,24 @@ class TestMissingDescriptions(GivenWhenThenTestScenario):
         pass
 
     def test(self):
-        with pytest.raises(GWTMissingDescriptionException):
+        with pytest.raises(GivenWhenThenDescriptionException):
+            super().test()
+
+
+class TestInvalidDescriptionType(GivenWhenThenTestScenario):
+    description = "Invalid description type"
+
+    def given(self):
+        pass
+
+    def when(self):
+        pass
+
+    def then(self):
+        pass
+
+    def test(self):
+        with pytest.raises(GivenWhenThenDescriptionException):
             super().test()
 
 
