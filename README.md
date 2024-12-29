@@ -111,7 +111,7 @@ While this library doesn't offer built-in support for rendering test scenarios o
 - Employing an HTML templating engine like `Jinja2` or `FastHTML` to render the descriptions.
 
 #### Example using `FastHTML`:
-![Project Screenshot](./assets/web_page_render_example.jpg)
+![Project Screenshot](gwt_test_framework/assets/web_page_render_example.jpg)
 
 
 ## Contributing
