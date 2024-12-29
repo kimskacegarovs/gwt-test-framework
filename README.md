@@ -20,70 +20,64 @@ pip install gwt-test-framework
 
 ## Usage
 
+Most up-to-date examples of usage can be found in the tests directory.
+
 ### Basic Usage
 
-To create a Given-When-Then test scenario, you need to create a class that inherits from `GivenWhenThenTestScenario` and implement the `given()`, `when()`, and `then()` methods.
+To create a Given-When-Then test scenario, you need to create a class that inherits from `GivenWhenThenTestScenario` and:
+- define the `description` class attribute.
+- implement the `given()`, `when()`, and `then()` methods.
 
 Example:
 
 ```python
-from gwt_test_framework import GivenWhenThenTestScenario
+from gwt_test_framework import GivenWhenThenTestScenario, GivenWhenThenDescription
 
-class MyTestScenario(GivenWhenThenTestScenario):
-    description_given = "User is logged in"
-    description_when = "User clicks on the submit button"
-    description_then = "A success message is displayed"
+class TestValidScenario(GivenWhenThenTestScenario):
+    description = GivenWhenThenDescription(
+        test_title="TestValidScenario",
+        given="Given value is 1",
+        when="When value is incremented",
+        then="Then value is 2",
+    )
 
     def given(self):
-        # Setup your test environment (e.g., log in user)
-        pass
+        self.given_value = 1
 
     def when(self):
-        # Simulate the action (e.g., click the button)
-        pass
+        self.given_value += 1
 
     def then(self):
-        # Verify the outcome (e.g., check success message)
-        pass
+        assert self.given_value == 2
 ```
 
 ### Running the Test
 
-Once you've defined your test scenario, you can run it with the `test()` method, which will execute the `given()`, `when()`, and `then()` methods in sequence, ensuring that the descriptions are provided.
+To run the test scenario, you can call the `test()` method on the test scenario class:
 
 ```python
-test_scenario = MyTestScenario()
-test_scenario.test()  # Run the test
+TestValidScenario.test()
 ```
+
+This will execute the `given()`, `when()`, and `then()` methods in order and run the test scenario.
+
+Is compatible with `pytest`.
 
 ### Validation
 
-The `test()` method will automatically check that the `given`, `when`, and `then` descriptions are defined. If any of the descriptions are missing, a `ValueError` will be raised.
+The `test()` method includes a validation step that ensures the test scenario is correctly defined. 
 
-### Getting Test Descriptions
+The validation checks:
+- if the `given()`, `when()`, and `then()` methods are implemented.
+- if the `description` attribute is defined.
 
-You can also retrieve the description for your test scenario using the `get_description()` and `get_subclass_descriptions()` methods.
-
-```python
-class Subclass1(GivenWhenThenTestScenario):
-    ...
-
-class Subclass2(GivenWhenThenTestScenario):
-    ...
-
-# Get the description for a single test scenario
-description = Subclass1.get_description()
-
-# Get the descriptions for all test scenarios
-all_descriptions = GivenWhenThenTestScenario.get_subclass_descriptions()
-```
 
 ### Rendering Test Scenarios as Markdown
 
 To render a test scenario as a Markdown string, you can use the `render_as_markdown()` method on your test scenario class. This method will generate a nicely formatted Markdown string that describes the `given`, `when`, and `then` parts of the scenario.
 
 ```python
-MyTestScenario.render_as_markdown()
+TestValidScenario.render_as_markdown()
 ```
 
 This will return a Markdown string in the following format:
@@ -91,22 +85,22 @@ This will return a Markdown string in the following format:
 ### Example
 
 ```markdown
-### Test Scenario: MyTestScenario
+> ### TestValidScenario
+    
+> **Given:** Given value is 1
 
-**Given:** User is logged in
+> **When:** When value is incremented
 
-**When:** User clicks on the submit button
-
-**Then:** A success message is displayed
+> **Then:** Then value is 2
 ```
 
-> ### Test Scenario: MyTestScenario
->
-> **Given:** User is logged in
->
-> **When:** User clicks on the submit button
->
-> **Then:** A success message is displayed
+> ### TestValidScenario
+> 
+> **Given:** Given value is 1
+> 
+> **When:** When value is incremented
+> 
+> **Then:** Then value is 2
 
 
 ## Contributing
