@@ -103,6 +103,17 @@ This will return a Markdown string in the following format:
 > **Then:** Then value is 2
 
 
+### Rendering Test Scenarios on web page
+
+While this library doesn't offer built-in support for rendering test scenarios on a web page, you can easily implement this functionality by:
+
+- Using a Markdown rendering library such as `markdown2` or `mistune`.
+- Employing an HTML templating engine like `Jinja2` or `FastHTML` to render the descriptions.
+
+#### Example using `FastHTML`:
+![Project Screenshot](gwt_test_framework/assets/web_page_render_example.jpg)
+
+
 ## Contributing
 
 We welcome contributions! If you'd like to contribute, please fork the repository and submit a pull request. Make sure your code passes all tests and includes adequate documentation.
