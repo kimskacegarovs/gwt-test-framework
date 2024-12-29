@@ -1,4 +1,8 @@
-from gwt_test_framework.base import GivenWhenThenTestScenario, GivenWhenThenDescriptionException, GivenWhenThenDescription
+from gwt_test_framework.base import (
+    GivenWhenThenTestScenario,
+    GivenWhenThenDescriptionException,
+    GivenWhenThenDescription,
+)
 import pytest
 
 
@@ -7,7 +11,7 @@ class TestValidScenario(GivenWhenThenTestScenario):
         test_title="TestValidScenario",
         given="Given value is 1",
         when="When value is incremented",
-        then="Then value is 2"
+        then="Then value is 2",
     )
 
     def given(self):
@@ -25,7 +29,7 @@ class TestFailingScenario(GivenWhenThenTestScenario):
         test_title="TestFailingScenario",
         given="Given value is 1",
         when="When value is incremented",
-        then="Then value is 3"
+        then="Then value is 3",
     )
 
     def given(self):
@@ -93,7 +97,9 @@ class TestDescriptionExtraction:
     def test_render_as_markdown(self):
         markdown = TestValidScenario.render_as_markdown()
         assert isinstance(markdown, str)
-        assert markdown == """
+        assert (
+            markdown
+            == """
             ### Test Scenario: TestValidScenario
 
             **Given**: Given value is 1
@@ -102,4 +108,4 @@ class TestDescriptionExtraction:
 
             **Then**: Then value is 2
         """
-
+        )
